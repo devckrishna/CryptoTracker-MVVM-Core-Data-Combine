@@ -59,17 +59,18 @@ extension CoinRowView {
     }
     
     private var rightColumn: some View {
-        VStack(alignment: .trailing) {
-            Text(coin.currentPrice.asCurrencyWith6Decimals())
-                .bold()
-                .foregroundColor(Color.theme.accent)
-            Text(coin.priceChangePercentage24H!.asPercentString())
-                .foregroundColor(
-                    coin.priceChangePercentage24H! >= 0
-                    ? Color.theme.green
-                    : Color.theme.red)
+            VStack(alignment: .trailing) {
+                Text(coin.currentPrice.asCurrencyWith6Decimals())
+                    .bold()
+                    .foregroundColor(Color.theme.accent)
+                Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
+                    .foregroundColor(
+                        (coin.priceChangePercentage24H ?? 0 >= 0) ?
+                        Color.theme.green :
+                        Color.theme.red
+                    )
+            }
+            .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
         }
-        .frame(width: UIScreen.main.bounds.width / 3, alignment: .trailing)
-    }
     
 }
